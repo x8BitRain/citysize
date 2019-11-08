@@ -8,12 +8,12 @@ class Map extends Component {
   state = {
     token: "pk.eyJ1IjoiZGJlbGxidHIiLCJhIjoiY2p5dTF5OXltMDFrOTNjbWxqdjZ5NmV2MCJ9.kkIqnzU12LF90W8yr-jsJw",
     viewport: {
-      width: 400,
-      height: 400,
-      latitude: 37.7577,
-      longitude: -122.4376,
-      zoom: 8
-    }
+      width: '100%',
+      height: '100%',
+      latitude: 52.4983681577817,
+      longitude: 13.3299193072014,
+      zoom: 8,
+      }
   };
 
 
@@ -21,6 +21,8 @@ class Map extends Component {
   render() {
     return (
       <ReactMapGL
+        mapStyle='mapbox://styles/mapbox/streets-v11'
+        className="map"
         {...this.state.viewport}
         mapboxApiAccessToken={this.state.token}
         onViewportChange={(viewport) => this.setState({viewport})}
@@ -28,10 +30,9 @@ class Map extends Component {
         <Source id="my-data" type="geojson" data={geojson}>
           <Layer
             id="point"
-            type="circle"
+            type="line"
             paint={{
-              'circle-radius': 10,
-              'circle-color': '#007cbf'
+              'line-width': 5
             }} />
         </Source>
       </ReactMapGL>
