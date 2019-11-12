@@ -1,11 +1,11 @@
 import React from 'react';
 //import logo from './logo.svg';
 import './App.scss';
-import Map from './components/Map.jsx'
+import MapView from './components/Map.jsx'
 
 function App() {
   return (
-    <Map />
+    <MapView />
   );
 }
 
