@@ -25,3 +25,10 @@ code {
   width: 100%;
   margin: 0 auto;
 }
+
+#btns {
+  position:absolute;
+  top:0px;
+  left:0px;
+  z-index:9999;
+}

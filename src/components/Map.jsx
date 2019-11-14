@@ -1,7 +1,13 @@
-import React, { Component } from 'react'
-import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+import React from 'react'
+import { Map as LeafletMap } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet-truesize';
+import MapboxLayer from "./MapboxLayer.js";
+import berlin from './outlines/berlin.js';
+import new_york from './outlines/new_york.js';
 
-
+const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoiZGJlbGxidHIiLCJhIjoiY2p5dTF5OXltMDFrOTNjbWxqdjZ5NmV2MCJ9.kkIqnzU12LF90W8yr-jsJw";
+const cities = [berlin, new_york]
 
 class MapView extends React.Component {
   constructor(props) {
@@ -9,14 +15,31 @@ class MapView extends React.Component {
     this.state = {
       lat: 30.0,
       lng: 0.0,
-      zoom: 3
+      zoom: 3,
+      cityNum: 0, //selected city number id idk
+      selectedCity: {
+        data: [berlin, new_york],
+      }
     }
   };
 
-  componentDidMount () {
-      const map = this.refs.theMap.leafletElement;
-      console.log(map);
-    }
+
+  componentDidMount() {
+    let mapInst =  this.refs.map.leafletElement;
+    console.log(mapInst);
+  }
+
+  addCityLayer = (thing) => {
+    const mapInst = this.refs.map.leafletElement;
+
+    const trueSizeLayer = new L.trueSize(this.state.selectedCity.data[thing.target.value], {
+      color: '#FF0000',
+      weight: 1,
+      opacity: 1,
+      dashArray: '7, 10',
+    }).addTo(mapInst);
+    console.log(trueSizeLayer);
+  }
 
 
   handleClick(e){
@@ -26,12 +49,18 @@ class MapView extends React.Component {
   render() {
     const position = [this.state.lat, this.state.lng];
     return (
-      <LeafletMap center={position} zoom={this.state.zoom} onClick={this.handleClick} ref={'theMap'} >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        />
+    <React.Fragment>
+      <LeafletMap center={position} zoom={this.state.zoom} onClick={this.handleClick} ref='map' >
+        <MapboxLayer
+            accessToken={MAPBOX_ACCESS_TOKEN}
+            style="mapbox://styles/mapbox/streets-v9"
+          />
       </LeafletMap>
+      <div id='btns'>
+        <button onClick={this.addCityLayer} value={0}>berlin</button>
+        <button onClick={this.addCityLayer} value={1}>nyc</button>
+        </div>
+      </React.Fragment>
     );
   }
 }
