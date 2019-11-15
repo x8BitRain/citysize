@@ -8,6 +8,7 @@ import getRandomColor from './randomColor.js';
 import berlin from './outlines/berlin.js';
 import new_york from './outlines/new_york.js';
 import vilnius from './outlines/vilnius.js';
+import bali from './outlines/bali.js';
 
 
 const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoiZGJlbGxidHIiLCJhIjoiY2p5dTF5OXltMDFrOTNjbWxqdjZ5NmV2MCJ9.kkIqnzU12LF90W8yr-jsJw";
@@ -22,7 +23,7 @@ class MapView extends React.Component {
       zoom: 3,
       cityNum: 0, //selected city number id idk
       selectedCity: {
-        data: [berlin, new_york, vilnius],
+        data: [berlin, new_york, vilnius, bali],
       }
     }
   };
@@ -43,7 +44,7 @@ class MapView extends React.Component {
       fill: true,
       fillColor: boundaryColor[0],
       fillOpacity: 0.15,
-      color: boundaryColor[1],
+      color: 'black',//boundaryColor[1],
       weight: 3,
       opacity: 1,
       stroke: true,
@@ -69,6 +70,8 @@ class MapView extends React.Component {
         <button onClick={this.addCityLayer} value={0}>Berlin</button>
         <button onClick={this.addCityLayer} value={1}>New York City</button>
         <button onClick={this.addCityLayer} value={2}>Vilnius</button>
+        <button onClick={this.addCityLayer} value={3}>Bali</button>
+
         </div>
       </React.Fragment>
     );
