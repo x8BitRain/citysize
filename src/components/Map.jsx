@@ -4,15 +4,10 @@ import L from 'leaflet';
 import 'leaflet-truesize';
 import MapboxLayer from "./MapboxLayer.js";
 import getRandomColor from './randomColor.js';
-
-import berlin from './outlines/berlin.js';
-import new_york from './outlines/new_york.js';
-import vilnius from './outlines/vilnius.js';
-import bali from './outlines/bali.js';
+import outlines from './outlines/outlines.js';
 
 
 const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoiZGJlbGxidHIiLCJhIjoiY2p5dTF5OXltMDFrOTNjbWxqdjZ5NmV2MCJ9.kkIqnzU12LF90W8yr-jsJw";
-const cities = [berlin, new_york]
 
 class MapView extends React.Component {
   constructor(props) {
@@ -21,32 +16,31 @@ class MapView extends React.Component {
       lat: 30.0,
       lng: 0.0,
       zoom: 3,
-      cityNum: 0, //selected city number id idk
-      selectedCity: {
-        data: [berlin, new_york, vilnius, bali],
-      }
     }
   };
 
 
   componentDidMount() {
-    let mapInst =  this.refs.map.leafletElement;
-    console.log(mapInst);
-    console.log();
+    //let mapInst =  this.refs.map.leafletElement;
+    //console.log(mapInst);
+    console.log(outlines.bali.data);
   }
 
+  //this.state.selectedCity.data[thing.target.value[0]]
+
   addCityLayer = (thing) => {
+    let param = thing.target.value;
     const mapInst = this.refs.map.leafletElement;
     let boundaryColor = getRandomColor();
-    const trueSizeLayer = new L.trueSize(this.state.selectedCity.data[thing.target.value[0]], {
+    const trueSizeLayer = new L.trueSize(outlines[param].data, {
       markerDiv: `<h2>${thing.target.innerText}</h2>`,
       iconAnchor: [35, 35],
       fill: true,
       fillColor: boundaryColor[0],
       fillOpacity: 0.15,
-      color: 'black',//boundaryColor[1],
-      weight: 3,
-      opacity: 1,
+      color: 'black',   //boundaryColor[1] is meant to be a
+      weight: 3,        //darker version of the same random
+      opacity: 1,       //color but black just looks nicer.
       stroke: true,
     }).addTo(mapInst);
   }
@@ -67,10 +61,10 @@ class MapView extends React.Component {
           />
       </LeafletMap>
       <div id='btns'>
-        <button onClick={this.addCityLayer} value={0}>Berlin</button>
-        <button onClick={this.addCityLayer} value={1}>New York City</button>
-        <button onClick={this.addCityLayer} value={2}>Vilnius</button>
-        <button onClick={this.addCityLayer} value={3}>Bali</button>
+        <button onClick={this.addCityLayer} value={'berlin'}>Berlin</button>
+        <button onClick={this.addCityLayer} value={'new_york'}>New York City</button>
+        <button onClick={this.addCityLayer} value={'vilnius'}>Vilnius</button>
+        <button onClick={this.addCityLayer} value={'bali'}>Bali</button>
 
         </div>
       </React.Fragment>

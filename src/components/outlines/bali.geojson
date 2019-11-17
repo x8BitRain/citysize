@@ -1,4 +1,4 @@
-const bali = {
+{
   type: "Feature",
   properties: {},
   geometry: {
@@ -8022,6 +8022,3 @@ const bali = {
       ]
     ]
   }
-};
-
-export default bali;
