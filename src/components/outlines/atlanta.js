@@ -1,4 +1,4 @@
-  const atlanta = {
+const atlanta = {
   type: "Feature",
   properties: {},
   geometry: {
