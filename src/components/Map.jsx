@@ -4,10 +4,11 @@ import L from 'leaflet';
 import 'leaflet-truesize';
 import MapboxLayer from "./MapboxLayer.js";
 import getRandomColor from './randomColor.js';
-import outlines from './outlines/outlines.js';
+import MapUI from './MapUI.jsx';
 
 
 const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoiZGJlbGxidHIiLCJhIjoiY2p5dTF5OXltMDFrOTNjbWxqdjZ5NmV2MCJ9.kkIqnzU12LF90W8yr-jsJw";
+let theCityItself = '';
 
 class MapView extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class MapView extends React.Component {
       lat: 30.0,
       lng: 0.0,
       zoom: 3,
+      selectedCity: ''
     }
   };
 
@@ -23,17 +25,30 @@ class MapView extends React.Component {
   componentDidMount() {
     //let mapInst =  this.refs.map.leafletElement;
     //console.log(mapInst);
-    console.log(outlines.bali.data);
+    //console.log(outlines.bali.data);
+  }
+
+  // setCity = (city) => {
+  //   console.log(city);
+  //   this.setState({
+  //     selectedCity: city
+  //   }, () => {
+  //   console.log(this.state.selectedCity);
+  //   });
+  // }
+
+  setCity = (city, name) => {
+    theCityItself = city; // usng a variabe is a few ms faster than setting state, wtf?
+    this.addCityLayer(city, name);
   }
 
   //this.state.selectedCity.data[thing.target.value[0]]
 
-  addCityLayer = (thing) => {
-    let param = thing.target.value;
+  addCityLayer = (outline, name) => {
     const mapInst = this.refs.map.leafletElement;
     let boundaryColor = getRandomColor();
-    const trueSizeLayer = new L.trueSize(outlines[param].data, {
-      markerDiv: `<h2>${thing.target.innerText}</h2>`,
+    const trueSizeLayer = new L.trueSize(outline, { // outlines[param].data
+      markerDiv: `<h2>${name}</h2>`,
       iconAnchor: [35, 35],
       fill: true,
       fillColor: boundaryColor[0],
@@ -44,7 +59,6 @@ class MapView extends React.Component {
       stroke: true,
     }).addTo(mapInst);
   }
-
 
   handleClick(e){
   console.log(e.latlng);
@@ -60,16 +74,17 @@ class MapView extends React.Component {
             style="mapbox://styles/mapbox/light-v10"
           />
       </LeafletMap>
-      <div id='btns'>
-        <button onClick={this.addCityLayer} value={'berlin'}>Berlin</button>
-        <button onClick={this.addCityLayer} value={'new_york'}>New York City</button>
-        <button onClick={this.addCityLayer} value={'vilnius'}>Vilnius</button>
-        <button onClick={this.addCityLayer} value={'bali'}>Bali</button>
-
-        </div>
+      <MapUI addOutline={this.setCity} />
       </React.Fragment>
     );
   }
 }
 
 export default MapView
+
+      // <div id='btns'>
+      //   <button onClick={this.addCityLayer} value={'berlin'}>Berlin</button>
+      //   <button onClick={this.addCityLayer} value={'new_york'}>New York City</button>
+      //   <button onClick={this.addCityLayer} value={'vilnius'}>Vilnius</button>
+      //   <button onClick={this.addCityLayer} value={'bali'}>Bali</button>
+      // </div>

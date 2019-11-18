@@ -32,9 +32,10 @@ code {
   margin: 0 auto;
 }
 
-#btns {
+#interface {
   position:absolute;
   top:0px;
-  left:0px;
+  right:0px;
   z-index:9999;
+  margin:20px;
 }
