@@ -3,6 +3,8 @@ import berlin from './berlin.js';
 import new_york from './new_york.js';
 import vilnius from './vilnius.js';
 import singapore from './singapore.js';
+import atlanta from './atlanta.js';
+
 
 const outlines =
 {
@@ -41,6 +43,14 @@ const outlines =
     singapore: {
       name: "Singapore",
       data: singapore,
+      price: 0,
+      priceCurrency: "EUR",
+      lat: 48.884211,
+      lng: 2.34689
+    },
+    atlanta: {
+      name: "Atlanta",
+      data: atlanta,
       price: 0,
       priceCurrency: "EUR",
       lat: 48.884211,
