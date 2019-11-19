@@ -81,10 +81,3 @@ class MapView extends React.Component {
 }
 
 export default MapView
-
-      // <div id='btns'>
-      //   <button onClick={this.addCityLayer} value={'berlin'}>Berlin</button>
-      //   <button onClick={this.addCityLayer} value={'new_york'}>New York City</button>
-      //   <button onClick={this.addCityLayer} value={'vilnius'}>Vilnius</button>
-      //   <button onClick={this.addCityLayer} value={'bali'}>Bali</button>
-      // </div>
