@@ -39,3 +39,18 @@ code {
   z-index:9999;
   margin:20px;
 }
+
+.searchResult {
+  &:hover {
+    -webkit-transform: scale(1.25, 1.25);
+    transform: scale(1.25, 1.25);
+  }
+  &:after {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  &:hover::after {
+    opacity: 1;
+  }
+}
