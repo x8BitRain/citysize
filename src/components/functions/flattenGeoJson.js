@@ -1,5 +1,6 @@
 let geojsonHeader = {
   type: "Feature",
+  name: "",
   properties: {},
   geometry: {
     type: "Polygon",
@@ -15,25 +16,23 @@ let polygonIndex;
 
 const flattenGeoJson = (polygon) => {
 
-  console.log('polygon ');
-  console.log(polygon[0]);
+  // console.log('polygon ');
+  // console.log(polygon[0]);
 
-  console.log('template ');
-  console.log(geojsonHeader);
+  // console.log('template ');
+  // console.log(geojsonHeader);
 
+  // MultiPolygons GeoJSONs have another layer of depth so
+  // this changes polygonIndex to the appriate array depth.
   if (polygon[0].geojson.type === 'MultiPolygon') {
-    console.log("THIS IS MultiPolygon");
     polygonIndex = polygon[0].geojson.coordinates[0][0];
   } else if (polygon[0].geojson.type === 'Polygon') {
     polygonIndex = polygon[0].geojson.coordinates[0];
   }
-
   geojsonHeader.geometry.coordinates[0] = polygonIndex;
-
-  console.log("merged");
-  console.log(geojsonHeader);
-
-
+  geojsonHeader.name = polygon[0].display_name.split(',')[0];
+   console.log(geojsonHeader.name);
+  // console.log(geojsonHeader);
   return(geojsonHeader);
 }
 

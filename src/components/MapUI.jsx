@@ -25,7 +25,7 @@ export default class MapUI extends React.Component {
     let selectedCityResult = this.state.searchResults.filter(function (ex) {
         return ex.place_id === parseInt(resultValue);
       });
-
+    console.log(selectedCityResult);
     flattenGeoJson(selectedCityResult);
 
     this.props.addOutline(flattenGeoJson(selectedCityResult), 'test');
@@ -37,8 +37,12 @@ export default class MapUI extends React.Component {
     axios.get(`https://nominatim.openstreetmap.org/search.php?q=${e.target.value}&polygon_geojson=1&format=json&limit=5`)
       .then(res => {
         let cityResults = res.data.filter(function (el) {
-          return el.geojson.type === 'MultiPolygon' ||
-                 el.geojson.type === 'Polygon'; //only include search results that contain geojson polygons.
+          //console.log(Boolean(el.geojson.type));
+          if (el.geojson) {return el.geojson.type === 'MultiPolygon' ||
+                                  el.geojson.type === 'Polygon'
+          } else {
+            return null; // avoid results not containing geojson.
+          }; // only include search results that contain geojson polygons.
         });
         this.setState({ searchResults: cityResults });
         console.log(this.state.searchResults);
@@ -63,6 +67,7 @@ export default class MapUI extends React.Component {
           {this.state.searchResults.map(elem => (
           <div className={'searchResult'} value={elem.place_id} onClick={this.handleSearchResultClick} key={elem.place_id}>
             <h2>{elem.display_name}</h2>
+            <p>{elem.type}</p>
             <p>{elem.lat}</p>
             <p>{elem.lon}</p>
             <hr />

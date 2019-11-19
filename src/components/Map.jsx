@@ -45,10 +45,11 @@ class MapView extends React.Component {
   //this.state.selectedCity.data[thing.target.value[0]]
 
   addCityLayer = (outline, name) => {
+    console.log(outline);
     const mapInst = this.refs.map.leafletElement;
     let boundaryColor = getRandomColor();
     const trueSizeLayer = new L.trueSize(outline, { // outlines[param].data
-      markerDiv: `<h2>${name}</h2>`,
+      markerDiv: `<h2>${outline.name}</h2>`,
       iconAnchor: [35, 35],
       fill: true,
       fillColor: boundaryColor[0],
