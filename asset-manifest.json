@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/citysize/static/css/main.1c19188d.chunk.css",
+    "main.css": "/citysize/static/css/main.ffe81460.chunk.css",
     "main.js": "/citysize/static/js/main.a9049a8b.chunk.js",
     "main.js.map": "/citysize/static/js/main.a9049a8b.chunk.js.map",
     "runtime-main.js": "/citysize/static/js/runtime-main.59c411f9.js",
@@ -8,14 +8,14 @@
     "static/js/2.74a558b0.chunk.js": "/citysize/static/js/2.74a558b0.chunk.js",
     "static/js/2.74a558b0.chunk.js.map": "/citysize/static/js/2.74a558b0.chunk.js.map",
     "index.html": "/citysize/index.html",
-    "precache-manifest.ac3fb2649f36d83a9b6aedc6a901aabe.js": "/citysize/precache-manifest.ac3fb2649f36d83a9b6aedc6a901aabe.js",
+    "precache-manifest.77d6939834b142454f6faf5d1f483443.js": "/citysize/precache-manifest.77d6939834b142454f6faf5d1f483443.js",
     "service-worker.js": "/citysize/service-worker.js",
-    "static/css/main.1c19188d.chunk.css.map": "/citysize/static/css/main.1c19188d.chunk.css.map"
+    "static/css/main.ffe81460.chunk.css.map": "/citysize/static/css/main.ffe81460.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.59c411f9.js",
     "static/js/2.74a558b0.chunk.js",
-    "static/css/main.1c19188d.chunk.css",
+    "static/css/main.ffe81460.chunk.css",
     "static/js/main.a9049a8b.chunk.js"
   ]
 }
