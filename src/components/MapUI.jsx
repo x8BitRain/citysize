@@ -1,5 +1,5 @@
 import React from "react";
-import SearchResult from './searchResult.jsx';
+import SearchResult from "./searchResult.jsx";
 import outlines from "./outlines/outlines.js";
 import axios from "axios";
 import flattenGeoJson from "./functions/flattenGeoJson.js";
@@ -13,16 +13,7 @@ export default class MapUI extends React.Component {
     };
   }
 
-  // handleClick = e => {
-  //   this.props.addOutline(
-  //     outlines[e.target.id].data, // City GeoJSON data
-  //     outlines[e.target.id].name // City name
-  //   );
-  //   //console.log(`%c${end - start}ms to render ${outlines[e.target.id].name} with ${outlines[e.target.id].data.geometry.coordinates[0].length} lat long coordinates.`, 'font-size:x-large');
-  // };
-
   handleSearchResultClick = e => {
-    console.log(e)
     let resultValue = e.getAttribute("value"); //select matching search result based on value element in result html attribute
     console.log(resultValue);
     let selectedCityResult = this.state.searchResults.filter(function(ex) {
@@ -35,7 +26,8 @@ export default class MapUI extends React.Component {
   };
 
   handleSearch = e => {
-    if (e.target.value.length > 1) {
+    console.log(e.target.value);
+    if (e.target.value.length > 3) {
       axios
         .get(
           `https://nominatim.openstreetmap.org/search.php?q=${e.target.value}&polygon_geojson=1&format=json&limit=5`
@@ -53,17 +45,20 @@ export default class MapUI extends React.Component {
             } // only include search results that contain geojson polygons.
           });
           this.setState({ searchResults: cityResults });
-          (this.state.searchResults.length > 1) ?
-            this.setState({
-              style: {"padding-bottom": "15px"}
-            })
-              :
-            this.setState({
-              style: {"padding-bottom": "0px"}
-            })
+          //adds 15px to the bottom of search results container for prettiness.
+          if (this.state.searchResults.length > 1) {
+              this.setState({
+                style: { "padding-bottom": "15px" }
+              })
+            }
 
           console.log(this.state.searchResults);
         });
+    } else if (e.target.value.length < 3) {
+      this.setState({
+        searchResults: [],
+        style: { "padding-bottom": "0px" }
+      });
     }
   };
 
@@ -92,7 +87,10 @@ export default class MapUI extends React.Component {
           <div id="searchIconContainer">
             <div id="searchIcon"></div>
           </div>
-          <SearchResult returnResult={this.handleSearchResultClick} searchResults={this.state.searchResults} />
+          <SearchResult
+            returnResult={this.handleSearchResultClick}
+            searchResults={this.state.searchResults}
+          />
         </div>
       </div>
     );
