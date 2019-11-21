@@ -3,7 +3,7 @@ import { Map as LeafletMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-truesize';
 import MapboxLayer from "./MapboxLayer.js";
-import getRandomColor from './randomColor.js';
+import getRandomColor from './functions/randomColor.js';
 import MapUI from './MapUI.jsx';
 
 
@@ -23,29 +23,15 @@ class MapView extends React.Component {
 
 
   componentDidMount() {
-    //let mapInst =  this.refs.map.leafletElement;
-    //console.log(mapInst);
-    //console.log(outlines.bali.data);
-  }
 
-  // setCity = (city) => {
-  //   console.log(city);
-  //   this.setState({
-  //     selectedCity: city
-  //   }, () => {
-  //   console.log(this.state.selectedCity);
-  //   });
-  // }
+  }
 
   setCity = (city, name) => {
     theCityItself = city; // usng a variabe is a few ms faster than setting state, wtf?
     this.addCityLayer(city, name);
   }
 
-  //this.state.selectedCity.data[thing.target.value[0]]
-
   addCityLayer = (outline, name) => {
-    console.log(outline);
     const mapInst = this.refs.map.leafletElement;
     let boundaryColor = getRandomColor();
     const trueSizeLayer = new L.trueSize(outline, { // outlines[param].data
@@ -62,7 +48,7 @@ class MapView extends React.Component {
   }
 
   handleClick(e){
-  console.log(e.latlng);
+    console.log(e.latlng);
   }
 
   render() {

@@ -31,8 +31,7 @@ const flattenGeoJson = (polygon) => {
   }
   geojsonHeader.geometry.coordinates[0] = polygonIndex;
   geojsonHeader.name = polygon[0].display_name.split(',')[0];
-   console.log(geojsonHeader.name);
-  // console.log(geojsonHeader);
+
   return(geojsonHeader);
 }
 
