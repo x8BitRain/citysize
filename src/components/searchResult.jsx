@@ -7,6 +7,10 @@ export default class SearchResult extends React.Component {
     };
   }
 
+  handleClick = (e) => {
+    this.props.returnResult(e.target);
+  }
+
   render() {
     return (
       <div id="searchResults">
@@ -14,7 +18,7 @@ export default class SearchResult extends React.Component {
           <div
             className={"searchResult"}
             value={elem.place_id}
-            onClick={this.handleSearchResultClick}
+            onClick={this.handleClick}
             key={elem.place_id}>
             <h4>{elem.display_name}</h4>
             <p>{elem.type}</p>

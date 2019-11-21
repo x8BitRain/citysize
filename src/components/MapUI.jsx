@@ -13,16 +13,17 @@ export default class MapUI extends React.Component {
     };
   }
 
-  handleClick = e => {
-    this.props.addOutline(
-      outlines[e.target.id].data, // City GeoJSON data
-      outlines[e.target.id].name // City name
-    );
-    //console.log(`%c${end - start}ms to render ${outlines[e.target.id].name} with ${outlines[e.target.id].data.geometry.coordinates[0].length} lat long coordinates.`, 'font-size:x-large');
-  };
+  // handleClick = e => {
+  //   this.props.addOutline(
+  //     outlines[e.target.id].data, // City GeoJSON data
+  //     outlines[e.target.id].name // City name
+  //   );
+  //   //console.log(`%c${end - start}ms to render ${outlines[e.target.id].name} with ${outlines[e.target.id].data.geometry.coordinates[0].length} lat long coordinates.`, 'font-size:x-large');
+  // };
 
   handleSearchResultClick = e => {
-    let resultValue = e.target.getAttribute("value"); //select matching search result based on value element in result html attribute
+    console.log(e)
+    let resultValue = e.getAttribute("value"); //select matching search result based on value element in result html attribute
     console.log(resultValue);
     let selectedCityResult = this.state.searchResults.filter(function(ex) {
       return ex.place_id === parseInt(resultValue);
@@ -52,17 +53,16 @@ export default class MapUI extends React.Component {
             } // only include search results that contain geojson polygons.
           });
           this.setState({ searchResults: cityResults });
-          if (this.state.searchResults.length > 1) {
+          (this.state.searchResults.length > 1) ?
             this.setState({
               style: {"padding-bottom": "15px"}
-            });
-          } else {
+            })
+              :
             this.setState({
               style: {"padding-bottom": "0px"}
-            });
-          }
+            })
+
           console.log(this.state.searchResults);
-          console.log(this.state.style);
         });
     }
   };
@@ -92,7 +92,7 @@ export default class MapUI extends React.Component {
           <div id="searchIconContainer">
             <div id="searchIcon"></div>
           </div>
-          <SearchResult searchResults={this.state.searchResults} />
+          <SearchResult returnResult={this.handleSearchResultClick} searchResults={this.state.searchResults} />
         </div>
       </div>
     );
