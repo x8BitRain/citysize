@@ -75,6 +75,15 @@ code {
   }
 }
 
+@media only screen and (max-width: 900px) {
+  #interface {
+    width:88%;
+  }
+  .leaflet-control-container {
+    display:none;
+  }
+}
+
 #searchResults {
   margin:15px;
   p, h4 {
@@ -90,4 +99,12 @@ code {
   &:hover {
     border:1px solid red;
   }
+}
+
+.mapboxgl-canvas {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
 }

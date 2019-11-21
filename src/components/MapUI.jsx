@@ -15,18 +15,18 @@ export default class MapUI extends React.Component {
 
   handleSearchResultClick = e => {
     let resultValue = e.getAttribute("value"); //select matching search result based on value element in result html attribute
-    console.log(resultValue);
+    //console.log(resultValue);
     let selectedCityResult = this.state.searchResults.filter(function(ex) {
       return ex.place_id === parseInt(resultValue);
     });
-    console.log(selectedCityResult);
+    //console.log(selectedCityResult);
     flattenGeoJson(selectedCityResult);
 
     this.props.addOutline(flattenGeoJson(selectedCityResult), "test");
   };
 
   handleSearch = e => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     if (e.target.value.length > 3) {
       axios
         .get(
@@ -52,7 +52,7 @@ export default class MapUI extends React.Component {
               })
             }
 
-          console.log(this.state.searchResults);
+          //console.log(this.state.searchResults);
         });
     } else if (e.target.value.length < 3) {
       this.setState({
@@ -63,7 +63,13 @@ export default class MapUI extends React.Component {
   };
 
   componentDidMount() {
-    // console.log(this.refs.testing);
+    // prevents form from refreshing page when hitting enter.
+    this.refs.searchbar.onkeypress = function(e) {
+      var key = e.charCode || e.keyCode || 0;
+      if (key == 13) {
+        e.preventDefault();
+      }
+    }
   }
 
   render() {
@@ -75,11 +81,11 @@ export default class MapUI extends React.Component {
       );
     });
 
-    //{ itemList }
     return (
       <div id="interface">
         <div id="searchBox" style={this.state.style}>
           <input
+            ref='searchbar'
             type="search"
             onChange={this.handleSearch}
             placeholder="Search"
