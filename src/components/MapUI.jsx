@@ -1,6 +1,6 @@
 import React from "react";
 import SearchResult from "./searchResult.jsx";
-import outlines from "./outlines/outlines.js";
+//import outlines from "./outlines/outlines.js";
 import axios from "axios";
 import flattenGeoJson from "./functions/flattenGeoJson.js";
 
@@ -8,6 +8,8 @@ export default class MapUI extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      searchResultsStyle: {},
+      searchResultsFocus: true,
       searchResults: [],
       style: {}
     };
@@ -15,26 +17,20 @@ export default class MapUI extends React.Component {
 
   handleSearchResultClick = e => {
     let resultValue = e.getAttribute("value"); //select matching search result based on value element in result html attribute
-    //console.log(resultValue);
     let selectedCityResult = this.state.searchResults.filter(function(ex) {
       return ex.place_id === parseInt(resultValue);
     });
-    //console.log(selectedCityResult);
     flattenGeoJson(selectedCityResult);
 
-    this.props.addOutline(flattenGeoJson(selectedCityResult), "test");
+    this.props.addOutline(flattenGeoJson(selectedCityResult));
   };
 
   handleSearch = e => {
-    //console.log(e.target.value);
     if (e.target.value.length > 3) {
       axios
-        .get(
-          `https://nominatim.openstreetmap.org/search.php?q=${e.target.value}&polygon_geojson=1&format=json&limit=5`
-        )
+        .get(`https://nominatim.openstreetmap.org/search.php?q=${e.target.value}&polygon_geojson=1&format=json&limit=5`)
         .then(res => {
           let cityResults = res.data.filter(function(el) {
-            //console.log(Boolean(el.geojson.type));
             if (el.geojson) {
               return (
                 el.geojson.type === "MultiPolygon" ||
@@ -46,57 +42,61 @@ export default class MapUI extends React.Component {
           });
           this.setState({ searchResults: cityResults });
           //adds 15px to the bottom of search results container for prettiness.
-          if (this.state.searchResults.length > 1) {
+          if (this.state.searchResults.length > 0) {
               this.setState({
-                style: { "padding-bottom": "15px" }
+                style: { "paddingBottom": "10px" }
               })
             }
-
-          //console.log(this.state.searchResults);
         });
     } else if (e.target.value.length < 3) {
       this.setState({
         searchResults: [],
-        style: { "padding-bottom": "0px" }
+        style: { "paddingBottom": "0px" }
       });
     }
   };
 
+  collapseSearch = () => {
+
+  };
+
+
+
   componentDidMount() {
+    this.refs.searchbar.focus();
     // prevents form from refreshing page when hitting enter.
     this.refs.searchbar.onkeypress = function(e) {
       var key = e.charCode || e.keyCode || 0;
-      if (key == 13) {
+      if (key === 13) {
         e.preventDefault();
       }
     }
   }
 
   render() {
-    let itemList = Object.entries(outlines).map(([key, value]) => {
-      return (
-        <button key={key} id={key} onClick={this.handleClick}>
-          {value.name}
-        </button>
-      );
-    });
 
     return (
-      <div id="interface">
+      <div onChange={this.handleSearch}
+           // onMouseEnter={this.onResultsMouseFocus}
+           // onMouseLeave={this.onResultsMouseFocus}
+           // onFocus={this.onResultsFocus}
+           id="interface">
         <div id="searchBox" style={this.state.style}>
           <input
             ref='searchbar'
             type="search"
-            onChange={this.handleSearch}
-            placeholder="Search"
+            //onBlur={this.onResultsFocus}
+            placeholder="Search locations, cities, countries, states..."
           />
           <div id="searchIconContainer">
             <div id="searchIcon"></div>
           </div>
-          <SearchResult
-            returnResult={this.handleSearchResultClick}
-            searchResults={this.state.searchResults}
-          />
+          <div style={this.state.searchResultsStyle} id="searchResults">
+            <SearchResult
+              returnResult={this.handleSearchResultClick}
+              searchResults={this.state.searchResults}
+            />
+          </div>
         </div>
       </div>
     );

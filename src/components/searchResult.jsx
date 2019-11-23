@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import capitalize from './functions/capitalize.js';
 
 export default class SearchResult extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class SearchResult extends React.Component {
 
   render() {
     return (
-      <div id="searchResults">
+      <React.Fragment>
         {this.props.searchResults.map(elem => (
           <div
             className={"searchResult"}
@@ -21,13 +22,12 @@ export default class SearchResult extends React.Component {
             onClick={this.handleClick}
             key={elem.place_id}>
             <h4>{elem.display_name}</h4>
-            <p>{elem.type}</p>
+            <p>Border Type: {capitalize(elem.type)}</p>
             <p>{elem.lat}</p>
             <p>{elem.lon}</p>
-
           </div>
         ))}
-      </div>
+      </React.Fragment>
     );
   }
 }

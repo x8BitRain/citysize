@@ -34,7 +34,7 @@ class MapView extends React.Component {
   addCityLayer = (outline, name) => {
     const mapInst = this.refs.map.leafletElement;
     let boundaryColor = getRandomColor();
-    const trueSizeLayer = new L.trueSize(outline, { // outlines[param].data
+    L.trueSize(outline, { // outlines[param].data
       markerDiv: `<h2>${outline.name}</h2>`,
       iconAnchor: [35, 35],
       fill: true,
@@ -49,19 +49,20 @@ class MapView extends React.Component {
 
   handleClick(e){
     console.log(e.latlng);
+    console.log(this.userInterface)
   }
 
   render() {
     const position = [this.state.lat, this.state.lng];
     return (
     <React.Fragment>
-      <LeafletMap center={position} zoom={this.state.zoom} onClick={this.handleClick} ref='map' >
+      <LeafletMap center={position} zoom={this.state.zoom} zoomSnap='0.25' onClick={this.handleClick} ref='map' >
         <MapboxLayer
             accessToken={MAPBOX_ACCESS_TOKEN}
             style="mapbox://styles/mapbox/light-v10"
           />
       </LeafletMap>
-      <MapUI addOutline={this.setCity} />
+      <MapUI addOutline={this.setCity}  />
       </React.Fragment>
     );
   }
