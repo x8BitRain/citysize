@@ -1,6 +1,6 @@
 import React from "react";
 import SearchResult from "./searchResult.jsx";
-//import outlines from "./outlines/outlines.js";
+import Loader from "./loader.jsx";
 import axios from "axios";
 import flattenGeoJson from "./functions/flattenGeoJson.js";
 
@@ -11,6 +11,7 @@ export default class MapUI extends React.Component {
       searchResults: [],
       searchStyle: {'display': 'block'},
       focused: true,
+      loader: {'display': 'none'},
       style: {}
     };
   }
@@ -115,6 +116,7 @@ export default class MapUI extends React.Component {
             <div id="searchIcon"></div>
           </div>
           <div id="searchResults" onMouseEnter={this.setFocus}  style={this.state.searchStyle}>
+          {/*<Loader style={this.state.loader} />*/}
             <SearchResult
             onClick={this.focusInput}
               returnResult={this.handleSearchResultClick}
