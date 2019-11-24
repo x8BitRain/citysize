@@ -8,9 +8,9 @@ export default class MapUI extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResultsStyle: {},
-      searchResultsFocus: true,
       searchResults: [],
+      searchStyle: {'display': 'block'},
+      focused: true,
       style: {}
     };
   }
@@ -41,29 +41,48 @@ export default class MapUI extends React.Component {
             } // only include search results that contain geojson polygons.
           });
           this.setState({ searchResults: cityResults });
-          //adds 15px to the bottom of search results container for prettiness.
-          if (this.state.searchResults.length > 0) {
-              this.setState({
-                style: { "paddingBottom": "10px" }
-              })
-            }
         });
     } else if (e.target.value.length < 3) {
       this.setState({
         searchResults: [],
-        style: { "paddingBottom": "0px" }
       });
     }
   };
 
-  collapseSearch = () => {
+  setFocus = (e) => {
+    if (e.type === 'mouseenter') {
+      this.setState({
+        focused: true
+      });
+    } else if (e.type === 'mouseleave') {
+      this.setState({
+        focused: false
+      });
+    }
+  }
 
-  };
 
+  toggleUI = (e) => {
+    if (e.type === 'blur' && this.state.focused === true) {
+      this.focusInput();
+    } else if (e.type === 'blur' && this.state.focused === false) {
+      this.setState({
+        searchStyle: {'display' : 'none'},
+        //style: { 'paddingBottom': '0px' }
+      });
+    } else if (e.type === 'focus') {
+      this.setState({
+        searchStyle: {'display' : 'block'}
+      });
+    }
+  }
 
+  focusInput = () => {
+    this.refs.searchbar.focus();
+  }
 
   componentDidMount() {
-    this.refs.searchbar.focus();
+    this.focusInput();
     // prevents form from refreshing page when hitting enter.
     this.refs.searchbar.onkeypress = function(e) {
       var key = e.charCode || e.keyCode || 0;
@@ -77,22 +96,27 @@ export default class MapUI extends React.Component {
 
     return (
       <div onChange={this.handleSearch}
-           // onMouseEnter={this.onResultsMouseFocus}
-           // onMouseLeave={this.onResultsMouseFocus}
-           // onFocus={this.onResultsFocus}
+           onClick={this.collapseSearch}
+           onMouseEnter={this.setFocus}
+           onMouseLeave={this.setFocus}
            id="interface">
-        <div id="searchBox" style={this.state.style}>
+        <div id="searchBox"
+           onMouseEnter={this.setFocus}
+           style={this.state.style}>
           <input
             ref='searchbar'
             type="search"
-            //onBlur={this.onResultsFocus}
             placeholder="Search locations, cities, countries, states..."
+            onMouseEnter={this.setFocus}
+            onBlur={this.toggleUI}
+            onFocus={this.toggleUI}
           />
           <div id="searchIconContainer">
             <div id="searchIcon"></div>
           </div>
-          <div style={this.state.searchResultsStyle} id="searchResults">
+          <div id="searchResults" onMouseEnter={this.setFocus}  style={this.state.searchStyle}>
             <SearchResult
+            onClick={this.focusInput}
               returnResult={this.handleSearchResultClick}
               searchResults={this.state.searchResults}
             />

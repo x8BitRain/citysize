@@ -2,6 +2,9 @@
 
 h1, h2, h3, h4, h5, p, b, i, span, form, input {
   font-family: 'B612', sans-serif;
+   -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 body {
@@ -47,6 +50,7 @@ code {
     height: 0px;
     width: 0px;
     overflow: visible;
+    pointer-events:none;
     #searchIcon {
       background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
       height: 25px;
@@ -54,6 +58,7 @@ code {
       position: relative;
       top: -36px;
       left: 11px;
+      pointer-events:none;
       }
   }
   #searchBox {
@@ -96,8 +101,24 @@ code {
   margin: 15px;
   overflow: hidden;
 
+  h4 {
+    color: #252525;
+    transition: 0.2s;
+  }
+  p {
+    color: #525252;
+    transition: 0.3s;
+  }
   &:hover {
-    border:1px solid red;
+    h4 {
+      color: #736F6F;
+    }
+    p {
+      color: #736F6F
+    }
+  }
+  &:last-child {
+    padding-bottom: 15px;
   }
 }
 

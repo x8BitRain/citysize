@@ -17,10 +17,10 @@ class MapView extends React.Component {
       lat: 30.0,
       lng: 0.0,
       zoom: 3,
-      selectedCity: ''
+      selectedCity: '',
+      focus: {}
     }
   };
-
 
   componentDidMount() {
 
@@ -47,16 +47,19 @@ class MapView extends React.Component {
     }).addTo(mapInst);
   }
 
-  handleClick(e){
+  handleClick = (e) => {
     console.log(e.latlng);
-    console.log(this.userInterface)
   }
 
   render() {
     const position = [this.state.lat, this.state.lng];
     return (
     <React.Fragment>
-      <LeafletMap center={position} zoom={this.state.zoom} zoomSnap='0.25' onClick={this.handleClick} ref='map' >
+      <LeafletMap center={position}
+                  zoom={this.state.zoom}
+                  zoomSnap='0.25'
+                  onClick={this.handleClick}
+                  ref='map' >
         <MapboxLayer
             accessToken={MAPBOX_ACCESS_TOKEN}
             style="mapbox://styles/mapbox/light-v10"
