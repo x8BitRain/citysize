@@ -1,6 +1,7 @@
 let geojsonHeader = {
   type: "Feature",
   name: "",
+  bbox: [],
   properties: {},
   geometry: {
     type: "Polygon",
@@ -13,6 +14,7 @@ let geojsonHeader = {
 };
 
 let polygonIndex;
+let bbox;
 
 const flattenGeoJson = (polygon) => {
   // MultiPolygons GeoJSONs have another layer of depth so
@@ -24,6 +26,7 @@ const flattenGeoJson = (polygon) => {
   }
   geojsonHeader.geometry.coordinates[0] = polygonIndex;
   geojsonHeader.name = polygon[0].display_name.split(',')[0];
+  geojsonHeader.bbox = polygon[0].boundingbox;
 
   return(geojsonHeader);
 }

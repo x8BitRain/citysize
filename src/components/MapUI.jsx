@@ -21,10 +21,8 @@ export default class MapUI extends React.Component {
     let selectedCityResult = this.state.searchResults.filter(function(ex) {
       return ex.place_id === parseInt(resultValue);
     });
-    //console.log(selectedCityResult[0].lon);
-    flattenGeoJson(selectedCityResult);
-
-    this.props.addOutline(flattenGeoJson(selectedCityResult), selectedCityResult[0].lat, selectedCityResult[0].lon);
+    //flattenGeoJson(selectedCityResult);
+    this.props.addOutline(flattenGeoJson(selectedCityResult), selectedCityResult[0].lat, selectedCityResult[0].lon, selectedCityResult[0].boundingbox);
   };
 
   handleSearch = e => {
@@ -76,7 +74,6 @@ export default class MapUI extends React.Component {
     } else if (e.type === 'blur' && this.state.focused === false) {
       this.setState({
         searchStyle: {'display' : 'none'},
-        //style: { 'paddingBottom': '0px' }
       });
     } else if (e.type === 'focus') {
       this.setState({

@@ -26,16 +26,15 @@ class MapView extends React.Component {
 
   }
 
-  setCity = (city, lat, lon) => {
+  setCity = (city, lat, lon, bbox) => {
     theCityItself = city; // usng a variabe is a few ms faster than setting state, wtf?
-    this.addCityLayer(city, lat, lon);
+    this.addCityLayer(city, lat, lon, bbox);
   }
 
-  addCityLayer = (outline, lat, lon) => {
+  addCityLayer = (outline, lat, lon, bbox) => {
     const mapInst = this.refs.map.leafletElement;
-    console.log(outline);
-    //mapInst.flyToBounds([["1.2101324","103.6056259"],["1.4715641","104.0436413"]]);
-    mapInst.flyTo([lat, lon], 4);
+    mapInst.flyToBounds([[bbox[0],bbox[2]],[bbox[1],bbox[3]]]); // Sends camera to bounding box lat/longs
+    //mapInst.flyTo([lat, lon], 4);
     let boundaryColor = getRandomColor();
     L.trueSize(outline, { // outlines[param].data
       markerDiv: `<h2>${outline.name}</h2>`,
@@ -60,7 +59,7 @@ class MapView extends React.Component {
     <React.Fragment>
       <LeafletMap center={position}
                   zoom={this.state.zoom}
-                  minZoom='2.5'
+                  minZoom='3'
                   zoomSnap='0.25'
                   onClick={this.handleClick}
                   ref='map'
