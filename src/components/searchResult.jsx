@@ -12,21 +12,27 @@ export default class SearchResult extends React.Component {
     this.props.returnResult(e.target);
   }
 
-  render() {
+  drawResults = () => {
     return (
-      <React.Fragment>
-        {this.props.searchResults.map(elem => (
+    this.props.searchResults.map(elem => (
           <div
             className={"searchResult"}
             value={elem.place_id}
             onClick={this.handleClick}
             key={elem.place_id}>
             <h4>{elem.display_name}</h4>
-            <p>Border Type: {capitalize(elem.type)}</p>
+            <p>{(elem.type === 'administrative') ? "Administrative Border" : capitalize(elem.type)}</p>
             <p>{elem.lat}</p>
             <p>{elem.lon}</p>
           </div>
-        ))}
+        ))
+    )
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        {(this.props.searchResults.length > 0) ? this.drawResults() : null}
       </React.Fragment>
     );
   }

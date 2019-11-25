@@ -1,48 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=B612&display=swap');
-
-h1, h2, h3, h4, h5, p, b, i, span, form, input {
-  font-family: 'B612', sans-serif;
-   -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  height:100vh;
-  width:100vw;
-  overflow:hidden;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-#root {
-  height:100%;
-  width:100%;
-}
-
-
-.leaflet-container {
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-}
-
 #interface {
-  width:30%;
-  position:absolute;
-  top:0px;
-  right:0px;
-  z-index:9999;
-  margin:20px;
+  width: 30%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 9999;
+  margin: 20px;
   button {
     display: none;
   }
@@ -50,7 +12,7 @@ code {
     height: 0px;
     width: 0px;
     overflow: visible;
-    pointer-events:none;
+    pointer-events: none;
     #searchIcon {
       background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
       height: 25px;
@@ -58,8 +20,8 @@ code {
       position: relative;
       top: -36px;
       left: 11px;
-      pointer-events:none;
-      }
+      pointer-events: none;
+    }
   }
   #searchBox {
     background-color: white;
@@ -67,13 +29,11 @@ code {
     border-radius: 14px;
   }
   input {
-    height:3.5em;
-    width: 96%;
+    height: 3.5em;
+    width: 97%;
     border-radius: 14px;
     border: none;
     padding-left: 50px;
-    //box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
-    // box-shadow: 0px 2px 9px 0px #0000001c;
     &:focus {
       outline: none;
     }
@@ -82,25 +42,26 @@ code {
 
 @media only screen and (max-width: 900px) {
   #interface {
-    width:88%;
+    width: 88%;
   }
   .leaflet-control-container {
-    display:none;
+    display: none;
   }
 }
 
 #searchResults {
-  margin:15px;
-  p, h4 {
-    margin:0 0 10px 0;
-    pointer-events:none;
+  margin: 15px;
+  p,
+  h4 {
+    margin: 0 0 10px 0;
+    pointer-events: none;
   }
 }
 
 .searchResult {
   margin: 15px;
   overflow: hidden;
-
+  transition: 0.2s;
   h4 {
     color: #252525;
     transition: 0.2s;
@@ -110,26 +71,18 @@ code {
     transition: 0.3s;
   }
   &:hover {
+    padding-left:2px;
     h4 {
-      color: #736F6F;
+      color: #736f6f;
     }
     p {
-      color: #736F6F
+      color: #736f6f;
     }
   }
   &:last-child {
     padding-bottom: 15px;
   }
 }
-
-.mapboxgl-canvas {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-}
-
 
 #loader {
   display: flex;
@@ -139,11 +92,11 @@ code {
   width: 2em;
   height: 0px;
   position: absolute;
-  top: 22px;
-  right: 17px;
+  top: 25px;
+  right: 30px;
   transform: scale(0.5);
   opacity: 25%;
-    span {
+  span {
     width: 0.3em;
     height: 1em;
     background-color: #000000;
@@ -176,4 +129,3 @@ code {
     }
   }
 }
-

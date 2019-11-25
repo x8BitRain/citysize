@@ -1,15 +1,15 @@
 import React from 'react';
 
-export default function Loader() {
+export default class loader extends React.Component {
 
-
-  return (
+  render() {
+    return (
     <div id='loader'>
       <span></span>
       <span></span>
       <span></span>
       <span></span>
     </div>
-  );
+    );
+  }
 }
-

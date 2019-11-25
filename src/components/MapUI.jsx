@@ -11,7 +11,7 @@ export default class MapUI extends React.Component {
       searchResults: [],
       searchStyle: {'display': 'block'},
       focused: true,
-      loader: {'display': 'none'},
+      loading: false,
       style: {}
     };
   }
@@ -21,15 +21,22 @@ export default class MapUI extends React.Component {
     let selectedCityResult = this.state.searchResults.filter(function(ex) {
       return ex.place_id === parseInt(resultValue);
     });
+    //console.log(selectedCityResult[0].lon);
     flattenGeoJson(selectedCityResult);
 
-    this.props.addOutline(flattenGeoJson(selectedCityResult));
+    this.props.addOutline(flattenGeoJson(selectedCityResult), selectedCityResult[0].lat, selectedCityResult[0].lon);
   };
 
   handleSearch = e => {
     if (e.target.value.length > 3) {
+      this.setState({
+        loading:true
+      });
       axios
         .get(`https://nominatim.openstreetmap.org/search.php?q=${e.target.value}&polygon_geojson=1&format=json&limit=5`)
+        .catch(function (error) {
+          // handle error
+          console.log(error);})
         .then(res => {
           let cityResults = res.data.filter(function(el) {
             if (el.geojson) {
@@ -41,7 +48,7 @@ export default class MapUI extends React.Component {
               return null; // avoid results not containing geojson.
             } // only include search results that contain geojson polygons.
           });
-          this.setState({ searchResults: cityResults });
+          this.setState({ searchResults: cityResults, loading:false });
         });
     } else if (e.target.value.length < 3) {
       this.setState({
@@ -93,9 +100,14 @@ export default class MapUI extends React.Component {
     }
   }
 
+  doThing = () => {
+
+  }
+
   render() {
 
     return (
+
       <div onChange={this.handleSearch}
            onClick={this.collapseSearch}
            onMouseEnter={this.setFocus}
@@ -111,12 +123,13 @@ export default class MapUI extends React.Component {
             onMouseEnter={this.setFocus}
             onBlur={this.toggleUI}
             onFocus={this.toggleUI}
+            onClick={this.doThing}
           />
           <div id="searchIconContainer">
             <div id="searchIcon"></div>
           </div>
           <div id="searchResults" onMouseEnter={this.setFocus}  style={this.state.searchStyle}>
-          {/*<Loader style={this.state.loader} />*/}
+          {this.state.loading ? <Loader/> : null}
             <SearchResult
             onClick={this.focusInput}
               returnResult={this.handleSearchResultClick}

@@ -26,13 +26,16 @@ class MapView extends React.Component {
 
   }
 
-  setCity = (city, name) => {
+  setCity = (city, lat, lon) => {
     theCityItself = city; // usng a variabe is a few ms faster than setting state, wtf?
-    this.addCityLayer(city, name);
+    this.addCityLayer(city, lat, lon);
   }
 
-  addCityLayer = (outline, name) => {
+  addCityLayer = (outline, lat, lon) => {
     const mapInst = this.refs.map.leafletElement;
+    console.log(outline);
+    //mapInst.flyToBounds([["1.2101324","103.6056259"],["1.4715641","104.0436413"]]);
+    mapInst.flyTo([lat, lon], 4);
     let boundaryColor = getRandomColor();
     L.trueSize(outline, { // outlines[param].data
       markerDiv: `<h2>${outline.name}</h2>`,
@@ -57,12 +60,16 @@ class MapView extends React.Component {
     <React.Fragment>
       <LeafletMap center={position}
                   zoom={this.state.zoom}
+                  minZoom='2.5'
                   zoomSnap='0.25'
                   onClick={this.handleClick}
-                  ref='map' >
+                  ref='map'
+                  useFlyTo={true}
+                  attributionControl={true} >
         <MapboxLayer
             accessToken={MAPBOX_ACCESS_TOKEN}
             style="mapbox://styles/mapbox/light-v10"
+            attribution={'© <a href="https://www.openstreetmap.org/">OpenStreetMap</a> | © <a href="https://www.mapbox.com/">MapBox</a>'}
           />
       </LeafletMap>
       <MapUI addOutline={this.setCity}  />
