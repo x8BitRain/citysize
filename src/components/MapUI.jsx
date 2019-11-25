@@ -1,6 +1,6 @@
 import React from "react";
 import SearchResult from "./searchResult.jsx";
-import Loader from "./loader.jsx";
+import Loader from "./Loader.jsx";
 import axios from "axios";
 import flattenGeoJson from "./functions/flattenGeoJson.js";
 

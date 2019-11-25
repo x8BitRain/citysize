@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class loader extends React.Component {
+export default class Loader extends React.Component {
 
   render() {
     return (

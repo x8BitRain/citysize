@@ -1,0 +1,44 @@
+.modal {
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  z-index: 9999;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  margin:20px;
+  padding:30px;
+  max-width: 300px;
+  min-width:230px;
+  p, h4, li {
+    margin:0 0 10px 0;
+  }
+  ul {
+    padding-left:15px;
+  }
+  #close {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    transition:0.2s;
+    &:hover {
+      opacity:25%;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .modal {
+    max-width:100%;
+  }
+}
+
+
+@media only screen and (max-width: 319px) {
+  .modal {
+    display:none;
+  }
+}

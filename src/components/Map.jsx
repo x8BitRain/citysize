@@ -5,6 +5,7 @@ import 'leaflet-truesize';
 import MapboxLayer from "./MapboxLayer.js";
 import getRandomColor from './functions/randomColor.js';
 import MapUI from './MapUI.jsx';
+import Modal from './Modal.jsx'
 
 
 const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoiZGJlbGxidHIiLCJhIjoiY2p5dTF5OXltMDFrOTNjbWxqdjZ5NmV2MCJ9.kkIqnzU12LF90W8yr-jsJw";
@@ -37,7 +38,7 @@ class MapView extends React.Component {
     //mapInst.flyTo([lat, lon], 4);
     let boundaryColor = getRandomColor();
     L.trueSize(outline, { // outlines[param].data
-      markerDiv: `<h2>${outline.name}</h2>`,
+      markerDiv: `<h2 style='text-shadow: 0px 0px 14px rgba(255,255,255,1);'>${outline.name}</h2>`,
       iconAnchor: [35, 35],
       fill: true,
       fillColor: boundaryColor[0],
@@ -68,10 +69,11 @@ class MapView extends React.Component {
         <MapboxLayer
             accessToken={MAPBOX_ACCESS_TOKEN}
             style="mapbox://styles/mapbox/light-v10"
-            attribution={'© <a href="https://www.openstreetmap.org/">OpenStreetMap</a> | © <a href="https://www.mapbox.com/">MapBox</a>'}
+            attribution={'© <a href="https://www.openstreetmap.org/">OpenStreetMap</a> | © <a href="https://www.mapbox.com/">MapBox</a> | <a href="https://https://github.com/x8BitRain/citysize/">GitHub</a>'}
           />
       </LeafletMap>
-      <MapUI addOutline={this.setCity}  />
+        <MapUI addOutline={this.setCity}  />
+        <Modal />
       </React.Fragment>
     );
   }

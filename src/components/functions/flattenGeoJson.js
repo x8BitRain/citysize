@@ -14,7 +14,6 @@ let geojsonHeader = {
 };
 
 let polygonIndex;
-let bbox;
 
 const flattenGeoJson = (polygon) => {
   // MultiPolygons GeoJSONs have another layer of depth so
