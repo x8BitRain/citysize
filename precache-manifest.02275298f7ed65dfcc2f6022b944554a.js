@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "17f637bafd7f217e101d8f2e4bd6ff85",
+    "revision": "7fc38f309a0709f143c9e2206c60fbfb",
     "url": "/citysize/index.html"
   },
   {
-    "revision": "ad5cbf9d97bd9948f793",
+    "revision": "ef13f26495c92a6cb7f1",
     "url": "/citysize/static/css/main.d0fc6af9.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/citysize/static/js/2.8b4c0f55.chunk.js"
   },
   {
-    "revision": "ad5cbf9d97bd9948f793",
-    "url": "/citysize/static/js/main.887cb84a.chunk.js"
+    "revision": "ef13f26495c92a6cb7f1",
+    "url": "/citysize/static/js/main.236b12dc.chunk.js"
   },
   {
     "revision": "761ff0e9fa829ead2d03",
