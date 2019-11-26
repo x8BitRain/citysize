@@ -61,7 +61,9 @@ class MapView extends React.Component {
       <LeafletMap center={position}
                   zoom={this.state.zoom}
                   minZoom='3'
-                  zoomSnap='0.25'
+                  zoomSnap='0.5'
+                  bounceAtZoomLimits='false'
+                  wheelPxPerZoomLevel='80'
                   onClick={this.handleClick}
                   ref='map'
                   useFlyTo={true}
