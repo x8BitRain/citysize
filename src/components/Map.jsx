@@ -71,7 +71,7 @@ class MapView extends React.Component {
         <MapboxLayer
             accessToken={MAPBOX_ACCESS_TOKEN}
             style="mapbox://styles/mapbox/light-v10"
-            attribution={'© <a href="https://www.openstreetmap.org/">OpenStreetMap</a> | © <a href="https://www.mapbox.com/">MapBox</a> | <a href="https://https://github.com/x8BitRain/citysize/">GitHub</a>'}
+            attribution={'© <a href="https://www.openstreetmap.org/">OpenStreetMap</a> | © <a href="https://www.mapbox.com/">MapBox</a> | <a href="https://github.com/x8BitRain/citysize/">GitHub</a>'}
           />
       </LeafletMap>
         <MapUI addOutline={this.setCity}  />
