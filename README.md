@@ -7,9 +7,11 @@ The search box only returns items from OSM Nominatim with GeoJSON polygon data, 
 
 ## TODO
 - REFACTOR, REFACTOR, REFACTOR.
+- Add location stats UI, population, square meterage, etc.
+- Add VS mode, to compare two places directly without having to drag them around.
 - Add support for Mulitpolygon GeoJSON.
 - Add support for pasting arbitrary GeoJSON data.
-- Add GeoJSON simplification option
+- Add GeoJSON simplification option.
 - Add basic configuration settings, tileset theme, enable/disable FlyTo, etc.
 
 ## Bugs & Q&As

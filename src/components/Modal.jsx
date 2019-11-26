@@ -35,7 +35,7 @@ export default class Modal extends React.Component {
         <li>Search for any location like a city, country or even a building.</li>
         <li>Select a location from the search list to add it to the map.</li>
         <li>Drag the outline around the map and compare it to other locations!</li>
-        <li><a href='https://github.com/x8BitRain/citysize'>Read the FAQ on Github.</a></li>
+        <li>Bugs? <a href='https://github.com/x8BitRain/citysize'>Readme!</a></li>
       </ul>
       </div>
     );
