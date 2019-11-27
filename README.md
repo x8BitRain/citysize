@@ -1,6 +1,6 @@
 
 # citysize (WIP)
-An interactive map that lets you accurately compare geographic features like countries, cities, states and even buildings inspired by [thetruesizeof.com](https://thetruesize.com/) and powered by [nominatim.openstreetmap.org](http://nominatim.openstreetmap.org/).
+An interactive map that lets you accurately compare geographic features like countries, cities, states and even buildings inspired by [thetruesize.com](https://thetruesize.com/) and powered by [nominatim.openstreetmap.org](http://nominatim.openstreetmap.org/).
 
 ## How it works
 The search box only returns items from OSM Nominatim with GeoJSON polygon data, when you select a search entry the app with will convert the GeoJSON data into a basic outline it can be rendered to the map. The interactivity and the (mostly) accurate projection of the GeoJSON outlines on the map is possible with mapbox-gl-leaflet and leaflet-truesize.
