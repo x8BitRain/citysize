@@ -18,9 +18,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "https://x8bitrain.github.io/citysize",
+  "start_url": "https://x8bitrain.github.io/citysize/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#08d2ac",
-  "scope":"https://x8bitrain.github.io/citysize"
+  "scope":"https://x8bitrain.github.io/citysize/"
 }
