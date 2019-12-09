@@ -26,6 +26,10 @@ export default class MapUI extends React.Component {
   };
 
   handleSearch = e => {
+    if (e.target.value.match(/(type)/gm) && e.target.value.length > 10) {
+      console.log('found geojson');
+      // this.props.addOutline(flattenGeoJson(JSON.parse(e.target.value))); handle arbitrary geojson render
+    };
     if (e.target.value.length > 3) {
       this.setState({
         loading:true

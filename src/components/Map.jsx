@@ -7,7 +7,7 @@ import getRandomColor from './functions/randomColor.js';
 import MapUI from './MapUI.jsx';
 import Modal from './Modal.jsx'
 
-
+const deafultBbox = [[-47.27922900257082, -117.42187500000001],[75.40885422846455, 116.54296875000001]]
 const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoiZGJlbGxidHIiLCJhIjoiY2p5dTF5OXltMDFrOTNjbWxqdjZ5NmV2MCJ9.kkIqnzU12LF90W8yr-jsJw";
 let theCityItself = '';
 
@@ -27,12 +27,12 @@ class MapView extends React.Component {
 
   }
 
-  setCity = (city, lat, lon, bbox) => {
+  setCity = (city, lat, lon, bbox = deafultBbox) => {
     theCityItself = city; // usng a variabe is a few ms faster than setting state, wtf?
     this.addCityLayer(city, lat, lon, bbox);
   }
 
-  addCityLayer = (outline, lat, lon, bbox) => {
+  addCityLayer = (outline, lat = 0.0, lon = 0.0, bbox) => {
     const mapInst = this.refs.map.leafletElement;
     mapInst.flyToBounds([[bbox[0],bbox[2]],[bbox[1],bbox[3]]]); // Sends camera to bounding box lat/longs
     //mapInst.flyTo([lat, lon], 4);

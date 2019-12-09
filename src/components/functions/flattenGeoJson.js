@@ -7,7 +7,7 @@ let geojsonHeader = {
     type: "Polygon",
     coordinates: [
       [
-        //TODO: add bounding box to geojson skelet
+
       ]
     ]
   }
