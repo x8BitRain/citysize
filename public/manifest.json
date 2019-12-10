@@ -20,6 +20,13 @@
   ],
   "start_url": "https://x8bitrain.github.io/citysize/",
   "display": "standalone",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.android.chrome"
+    }
+  ],
   "theme_color": "#000000",
   "background_color": "#08d2ac",
   "scope":"https://x8bitrain.github.io/citysize/"
