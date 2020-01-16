@@ -35,7 +35,7 @@ export default class MapUI extends React.Component {
         loading:true
       });
       axios
-        .get(`https://nominatim.openstreetmap.org/search.php?q=${e.target.value}&polygon_geojson=1&format=json&limit=5`)
+        .get(`https://nominatim.openstreetmap.org/search.php?q=${e.target.value}&polygon_geojson=1&format=json&limit=5&polygon_threshold=0.0001`)
         .catch(function (error) {
           // handle error
           console.log(error);})

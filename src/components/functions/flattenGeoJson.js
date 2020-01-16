@@ -16,6 +16,7 @@ let geojsonHeader = {
 let polygonIndex;
 
 const flattenGeoJson = (polygon) => {
+  console.log(polygon[0].geojson.coordinates);
   // MultiPolygons GeoJSONs have another layer of depth so
   // this changes polygonIndex to the appriate array depth.
   if (polygon[0].geojson.type === 'MultiPolygon') {
