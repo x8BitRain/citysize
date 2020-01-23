@@ -34,7 +34,7 @@ class MapView extends React.Component {
 
   addCityLayer = (outline, lat = 0.0, lon = 0.0, bbox) => {
     const mapInst = this.refs.map.leafletElement;
-    mapInst.flyToBounds([[bbox[0],bbox[2]],[bbox[1],bbox[3]]]); // Sends camera to bounding box lat/longs
+    mapInst.fitBounds([[bbox[0],bbox[2]],[bbox[1],bbox[3]]]); // Sends camera to bounding box lat/longs
     //mapInst.flyTo([lat, lon], 4);
     let boundaryColor = getRandomColor();
     L.trueSize(outline, { // outlines[param].data
